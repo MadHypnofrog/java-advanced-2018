@@ -1,6 +1,7 @@
 package ru.ifmo.rain.kurilenko.walk;
 
 import java.io.*;
+import java.nio.file.NoSuchFileException;
 
 public class Walk {
     public static void main(String[] args) {
