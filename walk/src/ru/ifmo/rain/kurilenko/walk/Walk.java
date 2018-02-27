@@ -13,6 +13,10 @@ public class Walk {
             System.err.println("Error: args is null");
         } else if (args.length != 2) {
             System.err.println("Error: wrong number of arguments");
+        } else if (args[0] == null) {
+            System.err.println ("Error: input file is null");
+        } else if (args[1] == null) {
+            System.err.println ("Error: output file is null");
         } else try (BufferedReader in = Files.newBufferedReader(Paths.get(args[0]))) {
             try (BufferedWriter w = Files.newBufferedWriter(Paths.get(args[1]))) {
                 String path, hash;
@@ -38,8 +42,6 @@ public class Walk {
                         System.err.println("Error: output error");
                     }
                 }
-            } catch (NullPointerException e) {
-                System.err.println("Error: output file is null");
             } catch (InvalidPathException e) {
                 System.err.println("Error: output path " + args[1] + " is invalid");
             } catch (IOException e) {
@@ -47,8 +49,6 @@ public class Walk {
             } catch (SecurityException e) {
                 System.err.println("Error: security violation on output file " + args[1]);
             }
-        } catch (NullPointerException e) {
-            System.err.println("Error: input file is null");
         } catch (InvalidPathException e) {
             System.err.println("Error: input path " + args[0] + " is invalid");
         } catch (IOException e) {
