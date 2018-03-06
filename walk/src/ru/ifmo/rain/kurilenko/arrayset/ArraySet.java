@@ -2,7 +2,7 @@ package ru.ifmo.rain.kurilenko.arrayset;
 
 import java.util.*;
 
-public class ArraySet<E extends Comparable<E>> extends AbstractSet<E> implements SortedSet<E> {
+public class ArraySet<E> extends AbstractSet<E> implements SortedSet<E> {
     private List<E> a;
     private Comparator<? super E> comp = null;
 
@@ -16,9 +16,13 @@ public class ArraySet<E extends Comparable<E>> extends AbstractSet<E> implements
 
     public ArraySet(Collection<? extends E> c, Comparator<? super E> com) {
         comp = com;
-        TreeSet<E> tree = new TreeSet<>(comp);
-        tree.addAll(c);
-        a = new ArrayList<>(tree);
+        try {
+            TreeSet<E> tree = new TreeSet<>(comp);
+            tree.addAll(c);
+            a = new ArrayList<>(tree);
+        } catch (ClassCastException e) {
+            System.err.println ("Error: trying to create an array of non-comparable objects using default comparator");
+        }
     }
 
     private ArraySet(List<E> c, Comparator<? super E> com) {
