@@ -33,15 +33,14 @@ public class StudentDB implements StudentQuery {
     public Set<String> getDistinctFirstNames(final List<Student> students) {
         return students.stream()
                 .map(Student::getFirstName)
-                .distinct()
-                .sorted()
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     public String getMinStudentFirstName(final List<Student> students) {
-        return sortStudentsById(students)
-                .get(0)
-                .getFirstName();
+        return students.stream()
+                .min(Comparator.comparingInt(Student::getId))
+                .map(Student::getFirstName)
+                .orElse("");
     }
 
     public List<Student> sortStudentsById(Collection<Student> students) {
@@ -81,12 +80,13 @@ public class StudentDB implements StudentQuery {
         return findStudents(students, p -> p.getGroup().equals(group));
     }
 
-    public Map<String, String> findStudentNamesByGroup(final Collection<Student> students, final String group) { //wtf is that
+    public Map<String, String> findStudentNamesByGroup(final Collection<Student> students, final String group) {
         return students.stream()
                 .filter(p -> p.getGroup().equals(group))
-                .collect(Collectors.groupingBy(Student::getLastName,
-                        Collectors.collectingAndThen(Collectors.minBy(Comparator.comparing(Student::getFirstName)),
-                                o -> o.get().getFirstName())));
+                .distinct()
+                .collect(Collectors.toMap(Student::getLastName,
+                                          Student::getFirstName,
+                                          BinaryOperator.minBy(Comparator.naturalOrder())));
     }
 }
 
