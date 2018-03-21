@@ -1,0 +1,1 @@
+jar cfm Implementor.jar Manifest.txt out\src\production\walk\ru\ifmo\rain\kurilenko\impler
