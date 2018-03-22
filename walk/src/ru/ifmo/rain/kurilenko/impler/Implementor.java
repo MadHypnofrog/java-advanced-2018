@@ -23,6 +23,20 @@ import java.util.zip.ZipEntry;
 
 public class Implementor implements Impler, JarImpler {
     private static final String tab = "     ";
+
+    /**
+     * Produces code implementing interface specified by provided <tt>token</tt>.
+     * <p>
+     * Generated class full name is the same as full name of the type token with <tt>Impl</tt> suffix
+     * added. Generated source code is placed in the subdirectory of the specified <tt>root</tt> directory
+     * corresponding to interface's package and has the correct filename. For example, the implementation of the
+     * interface {@link java.util.List} goes to <tt>$root/java/util/ListImpl.java</tt>
+     *
+     *
+     * @param token type token to create implementation for
+     * @param root root directory
+     * @throws info.kgeorgiy.java.advanced.implementor.ImplerException when implementation cannot be generated
+     */
     public void implement(Class<?> token, Path root) throws ImplerException {
         if (token == null) {
             throw new ImplerException("Error: token is null");
@@ -111,34 +125,42 @@ public class Implementor implements Impler, JarImpler {
             throw new ImplerException(e.getMessage());
         }
     }
+
+    /**
+     * Produces <tt>.jar</tt> file implementing class or interface specified by provided <tt>token</tt>.
+     * <p>
+     * Generated class full name is the same as full name of the type token with <tt>Impl</tt> suffix
+     * added.
+     *
+     * @param token type token to create implementation for
+     * @param jarFile target <tt>.jar</tt> file
+     * @throws info.kgeorgiy.java.advanced.implementor.ImplerException when implementation cannot be generated
+     */
     public void implementJar(Class<?> token, Path jarFile) throws ImplerException {
-        implement(token, jarFile);
-        String toCompile = jarFile/*.getParent()*/
-                .resolve(token.getPackage().getName().replace('.', File.separatorChar))
-                .toString() + File.separatorChar + token.getSimpleName() + "Impl";
+        implement(token, jarFile.getParent());
+        String tokenPath = token.getPackage().getName().replace('.', '/') + '/' + token.getSimpleName() + "Impl";
+        String classToCompile = jarFile.getParent().resolve(tokenPath).toString();
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        if (compiler.run(null, null, null, toCompile + ".java") != 0) {
+        if (compiler.run(null, null, null, classToCompile + ".java") != 0) {
             throw new ImplerException("Error: cannot compile .java file");
         }
-        Manifest manifest = new Manifest();
-        manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0"); //this isn't supposed to work like that
-                                                                                         //it's not actually creating a .jar but a folder ending with .jar
-        /*try (JarOutputStream jos = new JarOutputStream(new FileOutputStream(jarFile.toString() + "\\"), manifest);
-             FileInputStream in = new FileInputStream(toCompile + ".class");
-             JarOutputStream jos2 = new JarOutputStream(new FileOutputStream(token.getSimpleName() + ".jar"), manifest)) {
-            //System.out.println(jarFile.toString());
-            jos.putNextEntry(new ZipEntry((toCompile + ".class").replace(toCompile.split("\\\\")[0] + "\\", "")));
-            jos2.putNextEntry(new ZipEntry((toCompile + ".class").replace(toCompile.split("\\\\")[0] + "\\", "")));
-            byte[] buffer = new byte[1024];
-            int len;
-            while((len = in.read(buffer)) > 0) {
-                jos.write(buffer, 0, len);
-                jos2.write(buffer, 0, len);
+
+        try {
+            if (jarFile.getParent() != null) {
+                Files.createDirectories(jarFile.getParent());
             }
-            jos.closeEntry();
-            jos2.closeEntry();
+        } catch (Exception e) {
+            throw new ImplerException("Error: can't create directories for .jar file");
+        }
+
+        Manifest manifest = new Manifest();
+        manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0");
+        try (JarOutputStream os = new JarOutputStream(new FileOutputStream(jarFile.toString()), manifest)) {
+            os.putNextEntry(new ZipEntry(tokenPath + ".class"));
+            Files.copy(Paths.get(classToCompile + ".class"), os);
+            os.closeEntry();
         } catch (Exception e) {
             throw new ImplerException(e.getMessage());
-        }*/
+        }
     }
 }
