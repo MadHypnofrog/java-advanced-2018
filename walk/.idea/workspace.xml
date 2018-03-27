@@ -19,13 +19,72 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Implementor.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/impler/Implementor.java">
+      <file leaf-file-name="IterativeParallelism.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/iterativeparallelism/IterativeParallelism.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="136" column="110" lean-forward="false" selection-start-line="136" selection-start-column="110" selection-end-line="136" selection-end-column="110" />
+            <state relative-caret-position="221">
+              <caret line="90" column="67" lean-forward="false" selection-start-line="90" selection-start-column="67" selection-end-line="90" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScalarIPTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://C:/temp/ScalarIPTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="35" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Worker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/iterativeparallelism/Worker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="27" column="39" lean-forward="true" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1199#1200#0" expanded="true" />
+                <element signature="e#1229#1230#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScalarIPTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/info/kgeorgiy/java/advanced/concurrent/ScalarIPTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="411">
+              <caret line="89" column="24" lean-forward="true" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="24" />
+              <folding>
+                <element signature="e#2559#2589#0" expanded="true" />
+                <element signature="e#2640#2641#0" expanded="true" />
+                <element signature="e#2674#2675#0" expanded="true" />
+                <element signature="e#3182#3191#0" expanded="true" />
+                <element signature="e#3269#3278#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Result.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/iterativeparallelism/Result.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+              <folding>
+                <element signature="e#150#151#0" expanded="true" />
+                <element signature="e#177#178#0" expanded="true" />
+                <element signature="e#210#211#0" expanded="true" />
+                <element signature="e#247#248#0" expanded="true" />
+                <element signature="e#272#273#0" expanded="true" />
+                <element signature="e#297#298#0" expanded="true" />
+                <element signature="e#316#317#0" expanded="true" />
+                <element signature="e#344#345#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -56,17 +115,14 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
               <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="9" column="84" lean-forward="false" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="84" />
-              <folding />
+              <folding>
+                <element signature="e#341#342#0" expanded="false" />
+                <element signature="e#371#372#0" expanded="false" />
+                <element signature="e#446#447#0" expanded="false" />
+                <element signature="e#483#484#0" expanded="false" />
+                <element signature="e#536#537#0" expanded="false" />
+                <element signature="e#564#565#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,8 +130,8 @@
       <file leaf-file-name="InterfaceJarImplementorTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/java/info/kgeorgiy/java/advanced/implementor/InterfaceJarImplementorTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+            <state relative-caret-position="459">
+              <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -92,28 +148,6 @@
                 <element signature="e#1578#1579#0" expanded="false" />
                 <element signature="e#3214#3215#0" expanded="false" />
                 <element signature="e#3258#3259#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Tester.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/java/info/kgeorgiy/java/advanced/implementor/Tester.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseTester.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/java/info/kgeorgiy/java/advanced/base/BaseTester.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -153,6 +187,10 @@
         <option value="$PROJECT_DIR$/java/info/kgeorgiy/java/advanced/implementor/standard/basic/Descriptor.java" />
         <option value="$PROJECT_DIR$/java/info/kgeorgiy/java/advanced/implementor/InterfaceJarImplementorTest.java" />
         <option value="$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/impler/Implementor.java" />
+        <option value="$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/iterativeparallelism/Result.java" />
+        <option value="$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/iterativeparallelism/Worker.java" />
+        <option value="$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/iterativeparallelism/IterativeParallelism.java" />
+        <option value="$PROJECT_DIR$/java/info/kgeorgiy/java/advanced/concurrent/ScalarIPTest.java" />
       </list>
     </option>
   </component>
@@ -210,6 +248,50 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="kurilenko" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="walk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="walk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kurilenko" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="studentdb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="walk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="walk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kurilenko" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iterativeparallelism" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -293,63 +375,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="implementor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="walk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="walk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="advanced" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="implementor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="walk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="walk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="advanced" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="implementor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="basic" />
+              <option name="myItemId" value="concurrent" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -369,9 +395,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -386,7 +412,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
-  <component name="RunManager" selected="Application.JarImplementor">
+  <component name="RunManager" selected="Application.IterativeParallelism">
     <configuration default="false" name="Walk" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="info.kgeorgiy.java.advanced.walk.Tester" />
@@ -821,6 +847,21 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="false" name="IterativeParallelism" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="info.kgeorgiy.java.advanced.concurrent.Tester" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="scalar ru.ifmo.rain.kurilenko.iterativeparallelism.IterativeParallelism" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="walk" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="false" name="Test" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="ru.ifmo.rain.kurilenko.Main" />
@@ -836,13 +877,14 @@
       <envs />
       <method />
     </configuration>
-    <list size="6">
+    <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Application.ArraySet" />
       <item index="1" class="java.lang.String" itemvalue="Application.StudentDB" />
       <item index="2" class="java.lang.String" itemvalue="Application.Implementor" />
       <item index="3" class="java.lang.String" itemvalue="Application.JarImplementor" />
-      <item index="4" class="java.lang.String" itemvalue="Application.Test" />
-      <item index="5" class="java.lang.String" itemvalue="Application.Walk" />
+      <item index="4" class="java.lang.String" itemvalue="Application.IterativeParallelism" />
+      <item index="5" class="java.lang.String" itemvalue="Application.Test" />
+      <item index="6" class="java.lang.String" itemvalue="Application.Walk" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -876,14 +918,15 @@
       <workItem from="1520378398279" duration="12251000" />
       <workItem from="1521570707902" duration="17114000" />
       <workItem from="1521741986204" duration="8864000" />
+      <workItem from="1522175526974" duration="8618000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77836000" />
+    <option name="totallyTimeSpent" value="86454000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -907,7 +950,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="HDInsight Spark Submission" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31079608" sideWeight="0.49642858" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31079608" sideWeight="0.49642858" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293348" sideWeight="0.49761903" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24940476" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -936,18 +979,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/info/kgeorgiy/java/advanced/walk/Tester.java" />
-    <entry file="file://$PROJECT_DIR$/src/info/kgeorgiy/java/advanced/base/BaseTester.java" />
-    <entry file="file://$PROJECT_DIR$/src/info/kgeorgiy/java/advanced/walk/WalkTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/walk/Walk.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/walk/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/info/kgeorgiy/java/advanced/walk/WalkTest.java" />
     <entry file="file://$PROJECT_DIR$/src/info/kgeorgiy/java/advanced/base/CG.java" />
     <entry file="file://$PROJECT_DIR$/src/info/kgeorgiy/java/advanced/base/BaseTest.java" />
     <entry file="file://$PROJECT_DIR$/src/info/kgeorgiy/java/advanced/base/BaseTester.java" />
@@ -1092,13 +1123,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/studentdb/StudentDB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="83" column="32" lean-forward="false" selection-start-line="83" selection-start-column="32" selection-end-line="83" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1150,19 +1174,19 @@
       </provider>
     </entry>
     <entry file="file://C:/temp/Rar$DI02.800/RandomAccessImpl.class" />
-    <entry file="file://C:/temp/Implementor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="343" column="43" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="400" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/temp/Rar$DI01.080/InterfaceWithoutMethodsImpl.class" />
     <entry file="file://$PROJECT_DIR$/java/info/kgeorgiy/java/advanced/implementor/ImplerException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="e#341#342#0" expanded="false" />
+            <element signature="e#371#372#0" expanded="false" />
+            <element signature="e#446#447#0" expanded="false" />
+            <element signature="e#483#484#0" expanded="false" />
+            <element signature="e#536#537#0" expanded="false" />
+            <element signature="e#564#565#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1170,19 +1194,13 @@
     <entry file="file://$PROJECT_DIR$/test03_standardInterfaces/info.kgeorgiy.java.advanced.implementor.standard.basic.Accessible.jar/info/kgeorgiy/java/advanced/implementor/standard/basic/AccessibleImpl.java" />
     <entry file="file://$PROJECT_DIR$/java/info/kgeorgiy/java/advanced/implementor/InterfaceJarImplementorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        <state relative-caret-position="459">
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/temp/Rar$DI02.575/Implementor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1877">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://C:/temp/Rar$DI02.575/Implementor.class" />
     <entry file="file://$PROJECT_DIR$/java/info/kgeorgiy/java/advanced/implementor/JarImpler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1199,10 +1217,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/impler/Implementor.java">
+    <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/studentdb/StudentDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="634">
+          <caret line="83" column="32" lean-forward="false" selection-start-line="83" selection-start-column="32" selection-end-line="83" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/temp/Implementor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="136" column="110" lean-forward="false" selection-start-line="136" selection-start-column="110" selection-end-line="136" selection-end-column="110" />
+          <caret line="40" column="7" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="269" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/impler/Implementor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1632">
+          <caret line="150" column="34" lean-forward="true" selection-start-line="150" selection-start-column="34" selection-end-line="150" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/iterativeparallelism/Result.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+          <folding>
+            <element signature="e#150#151#0" expanded="true" />
+            <element signature="e#177#178#0" expanded="true" />
+            <element signature="e#210#211#0" expanded="true" />
+            <element signature="e#247#248#0" expanded="true" />
+            <element signature="e#272#273#0" expanded="true" />
+            <element signature="e#297#298#0" expanded="true" />
+            <element signature="e#316#317#0" expanded="true" />
+            <element signature="e#344#345#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../все тесты/java/info/kgeorgiy/java/advanced/concurrent/ScalarIPTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="83" column="9" lean-forward="true" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/iterativeparallelism/Worker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="39" lean-forward="true" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1199#1200#0" expanded="true" />
+            <element signature="e#1229#1230#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/temp/ScalarIPTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="35" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/info/kgeorgiy/java/advanced/concurrent/ScalarIPTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="89" column="24" lean-forward="true" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="24" />
+          <folding>
+            <element signature="e#2559#2589#0" expanded="true" />
+            <element signature="e#2640#2641#0" expanded="true" />
+            <element signature="e#2674#2675#0" expanded="true" />
+            <element signature="e#3182#3191#0" expanded="true" />
+            <element signature="e#3269#3278#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/ifmo/rain/kurilenko/iterativeparallelism/IterativeParallelism.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="90" column="67" lean-forward="false" selection-start-line="90" selection-start-column="67" selection-end-line="90" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
