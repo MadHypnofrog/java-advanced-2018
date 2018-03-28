@@ -1,21 +1,26 @@
 package ru.ifmo.rain.kurilenko;
 
+import ru.ifmo.rain.kurilenko.iterativeparallelism.IterativeParallelism;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.jar.JarOutputStream;
 import java.util.zip.ZipEntry;
 
 public class Main {
     public static void main (String[] args) throws Exception {
-        JarOutputStream jos = new JarOutputStream(new FileOutputStream("test.jar"));
-        FileInputStream in = new FileInputStream("script.txt");
-        jos.putNextEntry(new ZipEntry("asd\\script.txt"));
-        byte[] buffer = new byte[1024];
-        int len;
-        while((len = in.read(buffer)) > 0) {
-            jos.write(buffer, 0, len);
-        }
-        jos.closeEntry();
-        jos.close();
+        IterativeParallelism it = new IterativeParallelism();
+        List<String> l = new ArrayList<>();
+        l.add(":0");
+        l.add(" 1444");
+        l.add ("THIS IS JUST A DREAM");
+        l.add (" a ");
+        l.add( " rofleksey   ");
+        l.add ("ROFL");
+        l.add ("WUT");
+        System.out.println(it.join (2, l));
+        //System.out.println(it.map(2, l, Object::toString));
     }
 }

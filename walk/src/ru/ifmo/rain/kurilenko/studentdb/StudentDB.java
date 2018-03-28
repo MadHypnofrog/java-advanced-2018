@@ -88,5 +88,6 @@ public class StudentDB implements StudentQuery {
                                           Student::getFirstName,
                                           BinaryOperator.minBy(Comparator.naturalOrder())));
     }
+
 }
 
