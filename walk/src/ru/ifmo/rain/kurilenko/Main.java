@@ -1,6 +1,7 @@
 package ru.ifmo.rain.kurilenko;
 
 import ru.ifmo.rain.kurilenko.iterativeparallelism.IterativeParallelism;
+import ru.ifmo.rain.kurilenko.iterativeparallelism.ParallelMapperImpl;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,7 +12,7 @@ import java.util.zip.ZipEntry;
 
 public class Main {
     public static void main (String[] args) throws Exception {
-        IterativeParallelism it = new IterativeParallelism();
+        IterativeParallelism it = new IterativeParallelism(new ParallelMapperImpl(10));
         List<String> l = new ArrayList<>();
         l.add(":0");
         l.add(" 1444");

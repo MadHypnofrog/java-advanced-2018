@@ -8,9 +8,6 @@ class Result<R> {
     Result (R val) {
         value = val;
     }
-    Result (Result<R> another) {
-        value = another.value;
-    }
     void setValue(R r) {
         value = r;
     }

@@ -241,9 +241,9 @@ public class Implementor implements Impler, JarImpler {
      * @throws info.kgeorgiy.java.advanced.implementor.ImplerException when implementation cannot be generated
      */
     public void implementJar(Class<?> token, Path jarFile) throws ImplerException {
-        implement(token, jarFile.getParent());
+        implement(token, Paths.get(".\\tmp"));
         String tokenPath = token.getPackage().getName().replace('.', '/') + '/' + token.getSimpleName() + "Impl";
-        String classToCompile = jarFile.getParent().resolve(tokenPath).toString();
+        String classToCompile = Paths.get(".\\tmp").resolve(tokenPath).toString();
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         if (compiler.run(null, null, null, classToCompile + ".java") != 0) {
             throw new ImplerException("Error: cannot compile .java file");
@@ -264,7 +264,42 @@ public class Implementor implements Impler, JarImpler {
             Files.copy(Paths.get(classToCompile + ".class"), os);
             os.closeEntry();
         } catch (Exception e) {
+            clearFiles(Paths.get(".\\tmp").toFile());
             throw new ImplerException(e.getMessage());
+        }
+        clearFiles(Paths.get(".\\tmp").toFile());
+    }
+
+    private void clearFiles(File file) {
+        if (!file.exists()) {
+            return;
+        }
+        if (file.isDirectory()) {
+            File[] list = file.listFiles();
+            if (list != null) {
+                for (File f : list) {
+                    clearFiles(f);
+                }
+            }
+        }
+        file.delete();
+    }
+
+    public static void main (String[] args) {
+        if (args == null || (args.length != 2 && args.length != 3)) {
+            System.out.println("Error: wrong number of arguments");
+            return;
+        }
+        Implementor imp = new Implementor();
+        try {
+            if (args.length == 2) {
+                imp.implement(Class.forName(args[0]), Paths.get(args[1]));
+            }
+            if (args.length == 3) {
+                imp.implementJar(Class.forName(args[1]), Paths.get(args[2]));
+            }
+        } catch (Exception e) {
+            System.out.println("An error occured: " + e.getMessage());
         }
     }
 }
