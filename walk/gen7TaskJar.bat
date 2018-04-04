@@ -1,4 +1,4 @@
 cd out\production\walk\
-jar cfm IterativeParallelism.jar ..\..\..\Manifest8Task.txt ru\ifmo\rain\kurilenko\iterativeparallelism
+jar cfm IterativeParallelismTest.jar ..\..\..\Manifest7Task.txt ru\ifmo\rain\kurilenko\iterativeparallelism
 cd ..\..\..
-move .\out\production\walk\IterativeParallelism.jar .\
+move .\out\production\walk\IterativeParallelismTest.jar .\

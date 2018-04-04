@@ -14,12 +14,12 @@ import java.util.function.Supplier;
 
 public class IterativeParallelism implements ListIP {
 
-    public ParallelMapperImpl map = null;
+    public ParallelMapper map = null;
 
     public IterativeParallelism() {
     }
 
-    public IterativeParallelism (ParallelMapperImpl mapper) {
+    public IterativeParallelism(ParallelMapper mapper) {
         map = mapper;
     }
 
@@ -46,9 +46,9 @@ public class IterativeParallelism implements ListIP {
         return workers;
     }
 
-    private <T, R> List<R> getResults (ArrayList<List<? extends T>> list, BiFunction<Result<R>, T, Boolean> ch,
-                                       BiFunction<Result<R>, T, R> fun,
-                                       Supplier<Result<R>> def) throws InterruptedException {
+    private <T, R> List<R> getResults(ArrayList<List<? extends T>> list, BiFunction<Result<R>, T, Boolean> ch,
+                                      BiFunction<Result<R>, T, R> fun,
+                                      Supplier<Result<R>> def) throws InterruptedException {
         if (map == null) {
             ArrayList<Worker<T, R>> workers = createWorkers(list, ch, fun, def);
             ArrayList<R> results = new ArrayList<>();
@@ -57,11 +57,10 @@ public class IterativeParallelism implements ListIP {
                 results.add(w.result.getValue());
             }
             return results;
-        }
-        else {
+        } else {
             return map.map(t -> {
                 Result<R> res = def.get();
-                for (T elem: t) {
+                for (T elem : t) {
                     if (ch.apply(res, elem)) {
                         res.setValue(fun.apply(res, elem));
                     }
@@ -71,10 +70,10 @@ public class IterativeParallelism implements ListIP {
         }
     }
 
-    private <T, R> R foldResult(List<R> results, BiFunction<R, R, R> fun, R def) throws InterruptedException {
+    private <R> R foldResult(List<R> results, BiFunction<R, R, R> fun, R def) throws InterruptedException {
         R res = def;
         boolean d = false;
-        for (R r: results) {
+        for (R r : results) {
             if (!d) {
                 res = r;
                 d = true;
@@ -85,25 +84,25 @@ public class IterativeParallelism implements ListIP {
         return res;
     }
 
-    private <T> T minMax (int threads, List<? extends T> values, Comparator<? super T> comp, Predicate<Integer> ch) throws InterruptedException {
+    private <T> T minMax(int threads, List<? extends T> values, Comparator<? super T> comp, Predicate<Integer> ch) throws InterruptedException {
         threads = Math.min(values.size(), threads);
         ArrayList<List<? extends T>> lists = split(threads, values);
-        return foldResult(getResults(lists, (Result<T>res, T t) -> ch.test(comp.compare(t, res.getValue())), (res, t) -> t,
+        return foldResult(getResults(lists, (Result<T> res, T t) -> ch.test(comp.compare(t, res.getValue())), (res, t) -> t,
                 () -> new Result<>(values.get(0))), (t1, t2) -> ch.test(comp.compare(t1, t2)) ? t1 : t2, null);
     }
 
     @Override
     public <T> T maximum(int threads, List<? extends T> values, Comparator<? super T> comparator) throws InterruptedException {
-        return minMax (threads, values, comparator, a -> a > 0);
+        return minMax(threads, values, comparator, a -> a > 0);
     }
 
     @Override
     public <T> T minimum(int threads, List<? extends T> values, Comparator<? super T> comparator) throws InterruptedException {
-        return minMax (threads, values, comparator, a -> a < 0);
+        return minMax(threads, values, comparator, a -> a < 0);
     }
 
-    private <T> boolean allAny (int threads, List<? extends T> values, Predicate<? super T> predicate, Predicate<Boolean> ch,
-                          Boolean def, BiFunction<Boolean, Boolean, Boolean> fold) throws InterruptedException {
+    private <T> boolean allAny(int threads, List<? extends T> values, Predicate<? super T> predicate, Predicate<Boolean> ch,
+                               Boolean def, BiFunction<Boolean, Boolean, Boolean> fold) throws InterruptedException {
         threads = Math.min(values.size(), threads);
         ArrayList<List<? extends T>> lists = split(threads, values);
         return foldResult(getResults(lists, (Result<Boolean> res, T t) -> ch.test(predicate.test(t)),
@@ -114,7 +113,6 @@ public class IterativeParallelism implements ListIP {
     @Override
     public <T> boolean all(int threads, List<? extends T> values, Predicate<? super T> predicate) throws InterruptedException {
         return allAny(threads, values, predicate, a -> !a, true, (t1, t2) -> t1 && t2);
-
     }
 
     @Override
@@ -126,14 +124,14 @@ public class IterativeParallelism implements ListIP {
     public String join(int threads, List<?> values) throws InterruptedException {
         threads = Math.min(values.size(), threads);
         ArrayList<List<?>> lists = split(threads, values);
-        return foldResult(getResults(lists, (res, t) -> true, (Result<StringBuilder>res, Object t) -> {
+        return foldResult(getResults(lists, (res, t) -> true, (Result<StringBuilder> res, Object t) -> {
             res.getValue().append(t.toString());
             return res.getValue();
         }, () -> new Result<>(new StringBuilder())), (t1, t2) -> t1.append(t2.toString()), new StringBuilder("")).toString();
     }
 
-    private <T, U> List<U> filterMap (int threads, List<? extends T> values, Predicate<? super T> predicate,
-                                      Function<? super T, ? extends U> f) throws InterruptedException {
+    private <T, U> List<U> filterMap(int threads, List<? extends T> values, Predicate<? super T> predicate,
+                                     Function<? super T, ? extends U> f) throws InterruptedException {
         threads = Math.min(values.size(), threads);
         ArrayList<List<? extends T>> lists = split(threads, values);
         return foldResult(getResults(lists, (res, t) -> predicate.test(t), (res, t) -> {

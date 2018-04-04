@@ -2,7 +2,7 @@ package ru.ifmo.rain.kurilenko.iterativeparallelism;
 
 import java.util.function.Function;
 
-public class MapperTask<T, R> {
+class MapperTask<T, R> {
     private Function<? super T, ? extends R> f;
     private T t;
     private boolean finished = false, err = false;
@@ -29,7 +29,7 @@ public class MapperTask<T, R> {
         notifyAll();
     }
 
-    synchronized void done() {
+    private synchronized void done() {
         finished = true;
         notifyAll();
     }
@@ -39,7 +39,7 @@ public class MapperTask<T, R> {
         done();
     }
 
-    public R getResult() throws InterruptedException {
+    R getResult() throws InterruptedException {
         waitTask();
         return res;
     }
