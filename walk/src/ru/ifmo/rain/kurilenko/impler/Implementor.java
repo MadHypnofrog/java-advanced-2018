@@ -270,6 +270,12 @@ public class Implementor implements Impler, JarImpler {
         clearFiles(Paths.get(".\\tmp").toFile());
     }
 
+
+    /**
+     * Recursively deletes all files, starting from the given {@link File}.
+     *
+     * @param file File to begin deleting from
+     */
     private void clearFiles(File file) {
         if (!file.exists()) {
             return;
@@ -295,8 +301,10 @@ public class Implementor implements Impler, JarImpler {
             if (args.length == 2) {
                 imp.implement(Class.forName(args[0]), Paths.get(args[1]));
             }
-            if (args.length == 3) {
+            else if (args[0].equals("-jar")) {
                 imp.implementJar(Class.forName(args[1]), Paths.get(args[2]));
+            } else {
+                System.out.println("Error: invalid arguments");
             }
         } catch (Exception e) {
             System.out.println("An error occured: " + e.getMessage());
