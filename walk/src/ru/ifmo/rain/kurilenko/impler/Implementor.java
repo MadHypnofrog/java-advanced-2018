@@ -8,19 +8,24 @@ import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 import java.io.*;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.jar.Attributes;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 
-
+/**
+ * Implementation class for {@link JarImpler} interface.
+ */
 public class Implementor implements Impler, JarImpler {
     /**
      * 4 spaces in a row.
@@ -46,7 +51,7 @@ public class Implementor implements Impler, JarImpler {
         if (root == null) {
             throw new ImplerException("Error: root is null");
         }
-        if (!token.isInterface()) {
+        if (token.isPrimitive() || token.isArray() || Modifier.isFinal(token.getModifiers()) || token == Enum.class) {
             throw new ImplerException("Error: token is not an interface");
         }
 
@@ -65,7 +70,6 @@ public class Implementor implements Impler, JarImpler {
                     char c = str.charAt(i);
                     if (c >= 128) {
                         out.write("\\u" + String.format("%04X", (int) c));
-                        //System.out.println(c);
                     } else {
                         out.write(c);
                     }
@@ -80,8 +84,20 @@ public class Implementor implements Impler, JarImpler {
             //Class name
             writeClass(token, w);
 
+
+            //Constructors
+            if (!token.isInterface()) {
+                writeConstructors(token, w);
+            }
+
             //Methods
-            writeMethods(token.getMethods(), w);
+            HashSet<MethodWrapper> methods = new HashSet<>();
+            methods = getMethods(methods, token.getMethods());
+            while (token != null) {
+                methods = getMethods(methods, token.getDeclaredMethods());
+                token = token.getSuperclass();
+            }
+            writeMethods(methods, w);
 
             w.write("}");
         } catch (Exception e) {
@@ -90,11 +106,26 @@ public class Implementor implements Impler, JarImpler {
     }
 
     /**
-     * Produces code of a class implementing interface specified by provided <tt>token</tt>.
+     * Adds {@link Method}s to the given {@link HashSet} that are not present yet and returns a resulting {@link HashSet}.
      * <p>
      *
-     * @param token type token to write a class for
-     * @param w     Writer to write in
+     * @param methods a {@link HashSet} of current {@link Method}s
+     * @param toAdd   an array of {@link Method}s to add
+     * @return a {@link HashSet} containing all the methods from <code>methods</code> and <code>toAdd</code>, excluding duplicates
+     */
+    private HashSet<MethodWrapper> getMethods(HashSet<MethodWrapper> methods, Method[] toAdd) {
+        return Arrays.stream(toAdd)
+                .filter(method -> Modifier.isAbstract(method.getModifiers()))
+                .map(MethodWrapper::new)
+                .collect(Collectors.toCollection(() -> methods));
+    }
+
+    /**
+     * Writes a header for a specified {@link Class} to a specified {@link Writer}.
+     * <p>
+     *
+     * @param token type token to write a header for
+     * @param w     {@link Writer} to write in
      * @throws IOException if an error has occurred during writing
      */
     private void writeClass(Class<?> token, Writer w) throws IOException {
@@ -105,19 +136,48 @@ public class Implementor implements Impler, JarImpler {
         if (Modifier.isInterface(mods)) {
             mods -= Modifier.INTERFACE;
         }
-        w.write(Modifier.toString(mods) + " class " + token.getSimpleName() + "Impl implements " + token.getCanonicalName() + " {" + System.lineSeparator());
+        w.write(Modifier.toString(mods) + " class " + token.getSimpleName() + "Impl " +
+                (token.isInterface() ? "implements " : "extends ") + token.getCanonicalName() + " {" + System.lineSeparator());
     }
 
     /**
-     * Writes all methods from <tt>methods</tt> to a specified Writer.
+     * Writes all non-private constructors for a specified {@link Class} to a specified {@link Writer}.
      * <p>
      *
-     * @param methods an array of methods
-     * @param w       Writer to write in
+     * @param token type token to write constructors for
+     * @param w     {@link Writer} to write in
+     * @throws IOException     if an error has occurred during writing
+     * @throws ImplerException if the class has no non-private constructors and thus cannot be extended
+     */
+    private void writeConstructors(Class<?> token, Writer w) throws ImplerException, IOException {
+        Constructor<?>[] constructors = Arrays.stream(token.getDeclaredConstructors())
+                .filter(constructor -> !Modifier.isPrivate(constructor.getModifiers()))
+                .toArray(Constructor[]::new);
+        if (constructors.length == 0) {
+            throw new ImplerException("Error: class " + token.getSimpleName() + " has no non-private constructors");
+        }
+        for (Constructor<?> constructor : constructors) {
+            w.write(Modifier.toString(constructor.getModifiers() & ~Modifier.TRANSIENT) + " " + token.getSimpleName() + "Impl (");
+            writeMethodArguments(constructor, w, true);
+            writeMethodExceptions(constructor, w);
+            w.write(" {" + System.lineSeparator() + tab);
+            writeMethodBody(constructor, w);
+            w.write(System.lineSeparator() + "}" + System.lineSeparator());
+        }
+    }
+
+
+    /**
+     * Writes all methods for a specified {@link Class} to a specified {@link Writer}.
+     * <p>
+     *
+     * @param methods a {@link HashSet} of unique {@link Method}s to write
+     * @param w       {@link Writer} to write in
      * @throws IOException if an error has occurred during writing
      */
-    private void writeMethods(Method[] methods, Writer w) throws IOException {
-        for (Method m : methods) {
+    private void writeMethods(HashSet<MethodWrapper> methods, Writer w) throws IOException {
+        for (MethodWrapper mm : methods) {
+            Method m = mm.getMethod();
             if (m.isDefault()) {
                 continue;
             }
@@ -129,7 +189,7 @@ public class Implementor implements Impler, JarImpler {
             writeMethodSignature(m, w);
 
             //Method arguments
-            writeMethodArguments(m, w);
+            writeMethodArguments(m, w, true);
 
             //Method exceptions
             writeMethodExceptions(m, w);
@@ -144,89 +204,95 @@ public class Implementor implements Impler, JarImpler {
     }
 
     /**
-     * Writes annotations for a specified method to a Writer.
+     * Writes all annotations for a specified {@link Executable} to a specified {@link Writer}.
      * <p>
      *
-     * @param m method to write annotations for
-     * @param w Writer to write in
+     * @param e {@link Executable} to write annotations for
+     * @param w {@link Writer} to write in
      * @throws IOException if an error has occurred during writing
      */
-    private void writeAnnotations(Method m, Writer w) throws IOException {
-        for (Annotation a : m.getAnnotations()) {
+    private void writeAnnotations(Executable e, Writer w) throws IOException {
+        for (Annotation a : e.getAnnotations()) {
             w.write("@" + a.annotationType().getCanonicalName() + System.lineSeparator());
         }
     }
 
     /**
-     * Writes method signature for a specified method to a Writer.
+     * Writes a signature for a specified {@link Executable} to a specified {@link Writer}.
      * <p>
      *
-     * @param m method to write method signature for
-     * @param w Writer to write in
+     * @param e {@link Executable} to write signature for
+     * @param w {@link Writer} to write in
      * @throws IOException if an error has occurred during writing
      */
-    private void writeMethodSignature(Method m, Writer w) throws IOException {
-        int mmods = m.getModifiers();
-        if (Modifier.isTransient(mmods)) {
-            mmods -= Modifier.TRANSIENT;
+    private void writeMethodSignature(Executable e, Writer w) throws IOException {
+        int mmods = e.getModifiers() & ~Modifier.TRANSIENT & ~Modifier.ABSTRACT;
+        String ret = "";
+        if (e instanceof Method) {
+            ret = ((Method) e).getReturnType().getCanonicalName();
         }
-        if (Modifier.isAbstract(mmods)) {
-            mmods -= Modifier.ABSTRACT;
-        }
-        w.write(tab + Modifier.toString(mmods) + " " + m.getReturnType().getCanonicalName() + " " + m.getName() + " (");
+        w.write(tab + Modifier.toString(mmods) + " " + ret + " " + e.getName() + " (");
 
     }
 
     /**
-     * Writes method arguments for a specified method to a Writer.
+     * Writes arguments for a specified {@link Executable} to a specified {@link Writer}.
      * <p>
      *
-     * @param m method to write arguments for
-     * @param w Writer to write in
+     * @param e    {@link Executable} to write arguments for
+     * @param w    {@link Writer} to write in
+     * @param type a {@link Boolean} that describes if a type signature is needed for variables
      * @throws IOException if an error has occurred during writing
      */
-    private void writeMethodArguments(Method m, Writer w) throws IOException {
-        w.write(Arrays.stream(m.getParameters())
-                .map(p -> p.getType().getCanonicalName() + " " + p.getName())
+    private void writeMethodArguments(Executable e, Writer w, boolean type) throws IOException {
+        w.write(Arrays.stream(e.getParameters())
+                .map(p -> (type ? (p.getType().getCanonicalName() + " ") : "") + p.getName())
                 .collect(Collectors.joining(", ")));
         w.write(")");
     }
 
     /**
-     * Writes method exceptions for a specified method to a Writer.
+     * Writes all exceptions for a specified {@link Executable} to a specified {@link Writer}.
      * <p>
      *
-     * @param m method to write exceptions for
-     * @param w Writer to write in
+     * @param e {@link Executable} to write exceptions for
+     * @param w {@link Writer} to write in
      * @throws IOException if an error has occurred during writing
      */
-    private void writeMethodExceptions(Method m, Writer w) throws IOException {
-        if (m.getExceptionTypes().length != 0) {
+    private void writeMethodExceptions(Executable e, Writer w) throws IOException {
+        if (e.getExceptionTypes().length != 0) {
             w.write(" throws ");
-            w.write(Arrays.stream(m.getExceptionTypes())
+            w.write(Arrays.stream(e.getExceptionTypes())
                     .map(Class::getCanonicalName)
                     .collect(Collectors.joining(", ")));
         }
     }
 
     /**
-     * Writes method body for a specified method to a Writer.
+     * Writes the body of a specified {@link Executable} to a specified {@link Writer}.
      * <p>
      *
-     * @param m method to write body for
-     * @param w Writer to write in
+     * @param e {@link Executable} to write the body for
+     * @param w {@link Writer} to write in
      * @throws IOException if an error has occurred during writing
      */
-    private void writeMethodBody(Method m, Writer w) throws IOException {
-        if (m.getReturnType() != void.class) {
-            w.write(tab + tab + "return ");
-            if (m.getReturnType() == boolean.class) {
-                w.write("false;");
-            } else if (m.getReturnType().isPrimitive()) {
-                w.write("0;");
-            } else {
-                w.write("null;");
+    private void writeMethodBody(Executable e, Writer w) throws IOException {
+        if (e instanceof Method) {
+            Method mm = (Method) e;
+            if (mm.getReturnType() != void.class) {
+                w.write(tab + tab + "return ");
+                if (mm.getReturnType() == boolean.class) {
+                    w.write("false;");
+                } else if (mm.getReturnType().isPrimitive()) {
+                    w.write("0;");
+                } else {
+                    w.write("null;");
+                }
             }
+        } else {
+            w.write("super (");
+            writeMethodArguments(e, w, false);
+            w.write(";");
         }
     }
 
@@ -274,7 +340,7 @@ public class Implementor implements Impler, JarImpler {
     /**
      * Recursively deletes all files, starting from the given {@link File}.
      *
-     * @param file File to begin deleting from
+     * @param file {@link File} to begin deleting from
      */
     private void clearFiles(File file) {
         if (!file.exists()) {
@@ -291,23 +357,34 @@ public class Implementor implements Impler, JarImpler {
         file.delete();
     }
 
-    public static void main (String[] args) {
+
+    /**
+     * Takes 2 or 3 arguments and either creates an implementation of a specified class or a <tt>.jar</tt> file containing this implementation.
+     * For 2 arguments, the first argument should be a class token and the second one is a root directory.
+     * For 3 arguments, the first one should be "-jar", second one is a class token and third one is a path to the desired <tt>.jar</tt> file.
+     *
+     * @param args an array of {@link String} with arguments
+     */
+    public static void main(String[] args) {
         if (args == null || (args.length != 2 && args.length != 3)) {
-            System.out.println("Error: wrong number of arguments");
+            System.out.println("Error: wrong number of arguments, should be 2 or 3");
             return;
         }
         Implementor imp = new Implementor();
         try {
             if (args.length == 2) {
                 imp.implement(Class.forName(args[0]), Paths.get(args[1]));
-            }
-            else if (args[0].equals("-jar")) {
-                imp.implementJar(Class.forName(args[1]), Paths.get(args[2]));
             } else {
-                System.out.println("Error: invalid arguments");
+                if (args[0].equals("-jar")) {
+                    imp.implementJar(Class.forName(args[1]), Paths.get(args[2]));
+                } else {
+                    System.out.println("Error: first argument should be -jar when there are 3 arguments");
+                }
             }
-        } catch (Exception e) {
-            System.out.println("An error occured: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class not found: " + e.getMessage());
+        } catch (ImplerException e) {
+            System.out.println("An error occured while implementing: " + e.getMessage());
         }
     }
 }
